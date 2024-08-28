@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #004d40;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section h2 {
+            margin-top: 0;
+            color: #004d40;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #004d40;
+        }
+        .input-group input, .input-group select, .input-group button {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .input-group button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .input-group button:hover {
+            background-color: #004d40;
+        }
+        .tips, .community {
+            list-style: none;
+            padding: 0;
+        }
+        .tips li, .community li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f1f8e9;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>EcoTracker</h1>
+</header>
+
+<div class="container">
+    <!-- User Dashboard -->
+    <div class="section">
+        <h2>User Dashboard</h2>
+        <div id="dashboard">
+            <p>Daily Carbon Footprint: <span id="carbon-footprint">0 kg CO2</span></p>
+            <p>Progress: <span id="progress">0%</span></p>
+        </div>
+    </div>
+
+    <!-- Activity Logger -->
+    <div class="section">
+        <h2>Activity Logger</h2>
+        <div class="input-group">
+            <label for="activity">Activity</label>
+            <select id="activity">
+                <option value="car">Driving (Car)</option>
+                <option value="electricity">Electricity Use</option>
+                <option value="waste">Waste Management</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" placeholder="Enter amount (e.g., miles, kWh, kg)">
+        </div>
+        <div class="input-group">
+            <button onclick="logActivity()">Log Activity</button>
+        </div>
+    </div>
+
+    <!-- Carbon Calculator -->
+    <div class="section">
+        <h2>Carbon Calculator</h2>
+        <p>Calculates carbon emissions based on the logged activities.</p>
+        <div id="carbon-calculator">
+            <p>Estimated Carbon Emissions: <span id="calculated-emissions">0 kg CO2</span></p>
+        </div>
+    </div>
+
+    <!-- Tips & Suggestions -->
+    <div class="section">
+        <h2>Tips & Suggestions</h2>
+        <ul class="tips">
+            <li>Use public transport instead of driving.</li>
+            <li>Switch to energy-efficient appliances.</li>
+            <li>Reduce, reuse, and recycle waste.</li>
+        </ul>
+    </div>
+
+    <!-- Community Section -->
+    <div class="section">
+        <h2>Community</h2>
+        <ul class="community">
+            <li>User A: Reduced carbon footprint by switching to a plant-based diet.</li>
+            <li>User B: Saved energy by using LED bulbs.</li>
+            <li>User C: Started composting to manage waste effectively.</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    function logActivity() {
+        const activity = document.getElementById('activity').value;
+        const amount = document.getElementById('amount').value;
+        const emissions = calculateEmissions(activity, amount);
+        
+        document.getElementById('calculated-emissions').innerText = `${emissions} kg CO2`;
+        document.getElementById('carbon-footprint').innerText = `${emissions} kg CO2`;
+        // Update progress and store the data as needed
+    }
+
+    function calculateEmissions(activity, amount) {
+        let emissions = 0;
+        switch(activity) {
+            case 'car':
+                emissions = amount * 0.24; // Example conversion factor
+                break;
+            case 'electricity':
+                emissions = amount * 0.45; // Example conversion factor
+                break;
+            case 'waste':
+                emissions = amount * 0.3; // Example conversion factor
+                break;
+        }
+        return emissions.toFixed(2);
+    }
+</script>
+
+</body>
+</html>
